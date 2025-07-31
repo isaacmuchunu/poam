@@ -7,7 +7,7 @@ export const poamItemSchema = z.object({
   weaknessDescription: z.string().optional(),
   sourceOfWeakness: z.string().optional(),
   severityLevel: z.enum(['Critical', 'High', 'Moderate', 'Low']),
-  resourceEstimate: z.record(z.string(), z.any()).optional(),
+  resourceEstimate: z.record(z.string(), z.unknown()).optional(),
   identificationMethod: z.string().optional(),
   pointOfContactId: z.string().uuid(),
   plannedStartDate: z.string().datetime().optional(),

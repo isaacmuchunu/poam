@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { rateLimitMiddleware } from '@/lib/middleware';
 import { getTenantDbFromRequest } from '@/middleware/tenant';
 import { systems } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 // GET /api/systems - Get all systems for tenant
 export async function GET(req: NextRequest) {

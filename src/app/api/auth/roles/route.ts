@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs';
-import { clerkClient } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
+import { clerkClient } from '@clerk/nextjs/server';
 
 // GET /api/auth/roles - Get user roles and permissions
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const { userId, orgId } = auth();
+    const { userId, orgId } = await auth();
     
     if (!userId || !orgId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

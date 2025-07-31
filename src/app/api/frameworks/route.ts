@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { rateLimitMiddleware } from '@/lib/middleware';
 import { getTenantDbFromRequest } from '@/middleware/tenant';
 import { frameworks } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 // GET /api/frameworks - Get all compliance frameworks for tenant
 export async function GET(req: NextRequest) {

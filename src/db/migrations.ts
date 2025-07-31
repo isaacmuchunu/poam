@@ -1,6 +1,4 @@
-import { sql } from 'drizzle-orm';
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import { db, executeRawQuery } from './client';
+import { executeRawQuery } from './client';
 
 // Migration function for the main application schema
 export const runMigrations = async () => {
