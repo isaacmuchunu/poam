@@ -4,9 +4,31 @@ import { Button } from '@/components/ui/button';
 import { DashboardStats, DashboardTabs } from '@/components/dashboard/dashboard-stats';
 import { PoamTable } from '@/components/poam/poam-table';
 
+interface DashboardStatsData {
+  totalPoams: number;
+  overdue: number;
+  completed: number;
+  inProgress: number;
+  critical: number;
+  high: number;
+  moderate: number;
+  low: number;
+}
+
+interface PoamItem {
+  id: string;
+  securityControl: string;
+  weakness: string;
+  severityLevel: string;
+  status: string;
+  plannedCompletionDate: string;
+  systemAssetId?: string;
+  systemName?: string;
+}
+
 interface DashboardPageProps {
-  stats: any;
-  recentItems: any[];
+  stats: DashboardStatsData;
+  recentItems: PoamItem[];
 }
 
 export default function DashboardPage({ stats, recentItems }: DashboardPageProps) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { TenantSettings } from '@/components/tenant/tenant-settings';
 import { TenantInfo } from '@/components/tenant/tenant-selector';
 

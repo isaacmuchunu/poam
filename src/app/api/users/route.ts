@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
 import { getTenantDbFromRequest } from '@/middleware/tenant';
 import { users } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 // GET /api/users - Get all users for tenant
 export async function GET(req: NextRequest) {
   try {
-    const { userId, orgId } = auth();
+    const { userId, orgId } = await auth();
     
     if (!userId || !orgId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -26,7 +25,7 @@ export async function GET(req: NextRequest) {
 // POST /api/users - Create a new user
 export async function POST(req: NextRequest) {
   try {
-    const { userId, orgId } = auth();
+    const { userId, orgId } = await auth();
     
     if (!userId || !orgId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

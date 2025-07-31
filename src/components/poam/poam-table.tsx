@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { formatDate, getSeverityColor, getStatusColor } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
-import { MoreHorizontal, Edit, Trash, FileText } from 'lucide-react';
+import { Edit, Trash, FileText } from 'lucide-react';
 
 interface PoamItem {
   id: string;

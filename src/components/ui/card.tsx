@@ -1,5 +1,4 @@
 import * as React from "react"
-import * as CardPrimitive from "@radix-ui/react-card"
 
 import { cn } from "@/lib/utils"
 

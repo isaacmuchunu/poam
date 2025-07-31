@@ -5,11 +5,37 @@ import { PoamTable } from '@/components/poam/poam-table';
 import { PoamForm } from '@/components/poam/poam-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+interface PoamItem {
+  id: string;
+  securityControl: string;
+  weakness: string;
+  severityLevel: string;
+  status: string;
+  plannedCompletionDate: string;
+  systemAssetId?: string;
+  systemName?: string;
+}
+
+interface User {
+  id: string;
+  name: string;
+}
+
+interface System {
+  id: string;
+  name: string;
+}
+
+interface Framework {
+  id: string;
+  name: string;
+}
+
 interface PoamPageProps {
-  items: any[];
-  users: any[];
-  systems: any[];
-  frameworks: any[];
+  items: PoamItem[];
+  users: User[];
+  systems: System[];
+  frameworks: Framework[];
 }
 
 export default function PoamPage({ items, users, systems, frameworks }: PoamPageProps) {
