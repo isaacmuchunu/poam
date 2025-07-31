@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { rateLimitMiddleware } from '@/lib/middleware';
 import { getTenantDbFromRequest } from '@/middleware/tenant';
 import { systems } from '@/db/schema';
+import { systemSchema } from '@/lib/validations';
+import { logAuditAction, validateTenantAccess, handleApiError } from '@/lib/api-helpers';
 import { eq } from 'drizzle-orm';
 
 // GET /api/systems - Get all systems for tenant
@@ -23,27 +25,33 @@ export async function POST(req: NextRequest) {
   return rateLimitMiddleware(req, async (req) => {
     try {
       const body = await req.json();
-      const tenantId = req.headers.get('x-tenant-id');
+      const { tenantId, error } = validateTenantAccess(req);
       
-      if (!tenantId) {
-        return NextResponse.json({ error: 'No tenant context' }, { status: 403 });
-      }
+      if (error) return error;
+      
+      // Validate request body
+      const validatedData = systemSchema.parse(body);
       
       // Get tenant-specific database client
       const db = getTenantDbFromRequest(req);
       
       // Insert new system
       const result = await db.insert(systems).values({
-        ...body,
-        organizationId: tenantId,
+        ...validatedData,
+        organizationId: tenantId!,
         createdAt: new Date(),
         updatedAt: new Date()
       }).returning();
       
+      // Log audit action
+      await logAuditAction(req, 'CREATE', 'SYSTEM', result[0].id, { name: result[0].name });
+      
       return NextResponse.json(result[0], { status: 201 });
-    } catch (error) {
-      console.error('Error creating system:', error);
-      return NextResponse.json({ error: 'Failed to create system' }, { status: 500 });
+    } catch (error: any) {
+      if (error.name === 'ZodError') {
+        return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+      }
+      return handleApiError(error, 'create system');
     }
   });
 }
