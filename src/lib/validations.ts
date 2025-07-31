@@ -65,3 +65,58 @@ export const tenantSettingsSchema = z.object({
     sessionTimeout: z.number().default(3600),
   }).optional(),
 });
+
+// System validation schema
+export const systemSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().optional(),
+  systemType: z.string().optional(),
+  owner: z.string().optional(),
+  status: z.enum(['active', 'inactive', 'maintenance']).default('active'),
+});
+
+// Framework validation schema
+export const frameworkSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().optional(),
+  version: z.string().optional(),
+});
+
+// Evidence file validation schema
+export const evidenceFileSchema = z.object({
+  fileName: z.string().min(1),
+  fileType: z.string().optional(),
+  fileSize: z.number().optional(),
+  description: z.string().optional(),
+  poamItemId: z.string().uuid(),
+  storageUrl: z.string().url(),
+});
+
+// Report template validation schema
+export const reportTemplateSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().optional(),
+  config: z.object({
+    includeCharts: z.boolean().default(true),
+    includeSummary: z.boolean().default(true),
+    includeDetails: z.boolean().default(true),
+    filterBySeverity: z.array(z.string()).default([]),
+    filterByStatus: z.array(z.string()).default([]),
+    dateRange: z.enum(['last_30_days', 'last_90_days', 'last_year', 'all_time']).default('last_30_days'),
+  }),
+  isDefault: z.boolean().default(false),
+});
+
+// Organization member validation schema
+export const organizationMemberSchema = z.object({
+  userId: z.string().uuid(),
+  role: z.enum(['admin', 'manager', 'member', 'viewer']).default('member'),
+});
+
+// Audit log validation schema
+export const auditLogSchema = z.object({
+  action: z.string().min(1),
+  entityType: z.string().min(1),
+  entityId: z.string().uuid().optional(),
+  details: z.record(z.string(), z.any()).optional(),
+});
