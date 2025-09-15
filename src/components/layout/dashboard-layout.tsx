@@ -50,6 +50,9 @@ export function Sidebar({ className }: SidebarProps) {
             <Link href="/frameworks" className="block px-2 py-1 hover:bg-gray-100 rounded-md">
               Frameworks
             </Link>
+            <Link href="/evidence" className="block px-2 py-1 hover:bg-gray-100 rounded-md">
+              Evidence Files
+            </Link>
             <Link href="/reports" className="block px-2 py-1 hover:bg-gray-100 rounded-md">
               Reports
             </Link>
@@ -65,6 +68,9 @@ export function Sidebar({ className }: SidebarProps) {
             </Link>
             <Link href="/users" className="block px-2 py-1 hover:bg-gray-100 rounded-md">
               Users
+            </Link>
+            <Link href="/audit-logs" className="block px-2 py-1 hover:bg-gray-100 rounded-md">
+              Audit Logs
             </Link>
           </div>
         </div>
