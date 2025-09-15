@@ -17,7 +17,7 @@ export const getTenantDb = (tenantId: string) => {
 };
 
 // Function to execute raw SQL queries
-export const executeRawQuery = async (sql: string, params: any[] = []) => {
+export const executeRawQuery = async (sql: string, params: unknown[] = []) => {
   const client = await pool.connect();
   try {
     return await client.query(sql, params);

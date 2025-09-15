@@ -58,11 +58,14 @@ export async function PATCH(
       .returning();
     
     return NextResponse.json(result[0]);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating POA&M item:', error);
     
-    if (error.name === 'ZodError') {
-      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+    if (error && typeof error === 'object' && 'name' in error && error.name === 'ZodError') {
+      return NextResponse.json({ 
+        error: 'Validation error', 
+        details: (error as { errors: unknown[] }).errors 
+      }, { status: 400 });
     }
     
     return NextResponse.json({ error: 'Failed to update POA&M item' }, { status: 500 });

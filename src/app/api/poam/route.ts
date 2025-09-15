@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getTenantDbFromRequest } from '@/middleware/tenant';
 import { poamItems } from '@/db/schema';
 import { poamItemSchema } from '@/lib/validations';
-import { eq } from 'drizzle-orm';
 
 // GET /api/poam - Get all POA&M items for tenant
 export async function GET(req: NextRequest) {
@@ -40,11 +39,14 @@ export async function POST(req: NextRequest) {
     }).returning();
     
     return NextResponse.json(result[0], { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating POA&M item:', error);
     
-    if (error.name === 'ZodError') {
-      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+    if (error && typeof error === 'object' && 'name' in error && error.name === 'ZodError') {
+      return NextResponse.json({ 
+        error: 'Validation error', 
+        details: (error as { errors: unknown[] }).errors 
+      }, { status: 400 });
     }
     
     return NextResponse.json({ error: 'Failed to create POA&M item' }, { status: 500 });

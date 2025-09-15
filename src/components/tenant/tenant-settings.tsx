@@ -3,8 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -77,7 +75,7 @@ export function TenantSettings({ initialData, onSubmit }: TenantSettingsProps) {
                         </div>
                       </FormControl>
                       <FormDescription>
-                        Choose the primary color for your tenant's theme
+                        Choose the primary color for your tenant&apos;s theme
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -99,7 +97,7 @@ export function TenantSettings({ initialData, onSubmit }: TenantSettingsProps) {
                         />
                       </FormControl>
                       <FormDescription>
-                        URL to your organization's logo
+                        URL to your organization&apos;s logo
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -121,7 +119,7 @@ export function TenantSettings({ initialData, onSubmit }: TenantSettingsProps) {
                         />
                       </FormControl>
                       <FormDescription>
-                        URL to your organization's favicon
+                        URL to your organization&apos;s favicon
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createTenantSchema, getTenantDb } from '@/db/client';
+import { getTenantDb } from '@/db/client';
 
 // Middleware to set tenant context based on Clerk organization
 export const tenantMiddleware = async (req: NextRequest) => {

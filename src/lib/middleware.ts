@@ -19,7 +19,7 @@ const rateLimits = {
 const getTenantRedisClient = (tenantId: string) => {
   return {
     get: async (key: string) => redis.get(`tenant:${tenantId}:${key}`),
-    set: async (key: string, value: any, options?: any) => 
+    set: async (key: string, value: unknown, options?: { ex?: number }) => 
       redis.set(`tenant:${tenantId}:${key}`, value, options),
     del: async (key: string) => redis.del(`tenant:${tenantId}:${key}`),
     // Add other methods as needed

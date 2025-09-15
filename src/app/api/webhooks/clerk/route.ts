@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     // Create a new Svix instance with the webhook secret
     const wh = new Webhook(webhookSecret);
     
-    let evt: any;
+    let evt: unknown;
     
     try {
       evt = wh.verify(body, {
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     }
     
     // Handle the webhook
-    const { type, data } = evt;
+    const { type, data } = evt as { type: string; data: { id: string; name: string } };
     
     // Handle organization creation
     if (type === 'organization.created') {

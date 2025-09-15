@@ -1,6 +1,4 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { TenantSelector } from '@/components/tenant/tenant-selector';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';

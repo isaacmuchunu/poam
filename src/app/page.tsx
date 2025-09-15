@@ -271,7 +271,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-600">
-                "POA&M Architect has transformed how we manage our security findings. The multi-tenant capabilities allow us to track remediation across all our subsidiaries from a single dashboard."
+                &ldquo;POA&M Architect has transformed how we manage our security findings. The multi-tenant capabilities allow us to track remediation across all our subsidiaries from a single dashboard.&rdquo;
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -285,7 +285,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-600">
-                "The compliance mapping features have saved us countless hours during audit preparation. We can now generate reports for different frameworks with just a few clicks."
+                &ldquo;The compliance mapping features have saved us countless hours during audit preparation. We can now generate reports for different frameworks with just a few clicks.&rdquo;
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -299,7 +299,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-600">
-                "As a government contractor, we need to maintain strict compliance with FedRAMP. POA&M Architect makes it easy to track our remediation efforts and demonstrate progress to auditors."
+                &ldquo;As a government contractor, we need to maintain strict compliance with FedRAMP. POA&M Architect makes it easy to track our remediation efforts and demonstrate progress to auditors.&rdquo;
               </p>
             </div>
           </div>
