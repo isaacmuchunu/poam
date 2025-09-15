@@ -24,29 +24,109 @@ export async function GET() {
     // Get user's role in the organization
     const role = orgMembership.role;
     
-    // Define permissions based on role
+    // Define permissions based on role with enhanced RBAC
     let permissions = [];
     
     switch (role) {
       case 'admin':
         permissions = [
-          'read:poam',
-          'write:poam',
-          'delete:poam',
+          // POA&M permissions
+          'read:poam', 'write:poam', 'delete:poam', 'approve:poam', 'export:poam',
+          // Template permissions
+          'read:templates', 'write:templates', 'delete:templates', 'publish:templates',
+          // Milestone and task permissions
+          'read:milestones', 'write:milestones', 'delete:milestones', 'assign:milestones',
+          'read:tasks', 'write:tasks', 'delete:tasks', 'assign:tasks',
+          // Evidence permissions
+          'read:evidence', 'write:evidence', 'delete:evidence', 'approve:evidence', 'version:evidence',
+          // User management
+          'read:users', 'write:users', 'delete:users', 'assign:roles',
+          // System settings
+          'read:settings', 'write:settings', 'read:integrations', 'write:integrations',
+          // Reports and analytics
+          'read:reports', 'write:reports', 'export:reports', 'read:analytics',
+          // Workflow management
+          'read:workflows', 'write:workflows', 'execute:workflows',
+          // Audit logs
+          'read:audit_logs', 'export:audit_logs'
+        ];
+        break;
+      case 'auditor':
+        permissions = [
+          // POA&M permissions
+          'read:poam', 'write:poam', 'approve:poam', 'export:poam',
+          // Template permissions
+          'read:templates', 'write:templates',
+          // Milestone and task permissions
+          'read:milestones', 'write:milestones', 'assign:milestones',
+          'read:tasks', 'write:tasks', 'assign:tasks',
+          // Evidence permissions
+          'read:evidence', 'write:evidence', 'approve:evidence', 'version:evidence',
+          // Limited user management
           'read:users',
-          'write:users',
-          'read:settings',
-          'write:settings',
-          'read:reports',
-          'write:reports'
+          // Reports and analytics
+          'read:reports', 'write:reports', 'export:reports', 'read:analytics',
+          // Workflow execution
+          'read:workflows', 'execute:workflows',
+          // Audit logs
+          'read:audit_logs'
+        ];
+        break;
+      case 'manager':
+        permissions = [
+          // POA&M permissions
+          'read:poam', 'write:poam', 'approve:poam', 'export:poam',
+          // Template permissions
+          'read:templates', 'write:templates',
+          // Milestone and task permissions
+          'read:milestones', 'write:milestones', 'assign:milestones',
+          'read:tasks', 'write:tasks', 'assign:tasks',
+          // Evidence permissions
+          'read:evidence', 'write:evidence', 'approve:evidence',
+          // User management
+          'read:users', 'assign:roles',
+          // Reports and analytics
+          'read:reports', 'write:reports', 'export:reports', 'read:analytics',
+          // Workflow execution
+          'read:workflows', 'execute:workflows'
+        ];
+        break;
+      case 'contributor':
+        permissions = [
+          // POA&M permissions
+          'read:poam', 'write:poam', 'export:poam',
+          // Template permissions
+          'read:templates',
+          // Milestone and task permissions
+          'read:milestones', 'write:milestones',
+          'read:tasks', 'write:tasks',
+          // Evidence permissions
+          'read:evidence', 'write:evidence',
+          // Limited user access
+          'read:users',
+          // Reports
+          'read:reports', 'export:reports'
+        ];
+        break;
+      case 'viewer':
+        permissions = [
+          // Read-only access
+          'read:poam', 'export:poam',
+          'read:templates',
+          'read:milestones', 'read:tasks',
+          'read:evidence',
+          'read:users',
+          'read:reports', 'export:reports'
         ];
         break;
       case 'member':
         permissions = [
-          'read:poam',
-          'write:poam',
+          'read:poam', 'write:poam',
+          'read:templates',
+          'read:milestones', 'write:milestones',
+          'read:tasks', 'write:tasks',
+          'read:evidence', 'write:evidence',
           'read:users',
-          'read:settings',
           'read:reports'
         ];
         break;
